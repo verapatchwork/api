@@ -7,6 +7,6 @@ WORKDIR /home/node/app
 USER node
 COPY --chown=node:node verapatchwork ./
 WORKDIR /home/node/app/verapatchwork
-RUN yarn
+RUN yarn --network-timeout 30000
 
 CMD [ "yarn", "start" ]
