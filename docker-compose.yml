@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+  verapatchwork-strapi:
+    container_name: verapatchwork-strapi
+    build:
+      context: .
+    restart: unless-stopped
+    environment:
+      NODE_ENV: ${ENV}
+      DATABASE_CLIENT: postgres
+      DATABASE_NAME: strapi
+      DATABASE_HOST: verapatchwork-postgres
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: strapi
+      DATABASE_PASSWORD: strapi
+      TZ: America/Sao_Paulo
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '5'
+    volumes:
+      - ./app:/srv/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - verapatchwork-postgres
+
+  verapatchwork-postgres:
+    container_name: verapatchwork-postgres
+    image: postgres
+    environment:
+      POSTGRES_DB: strapi
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: strapi
+    volumes:
+      - ./data:/var/lib/postgresql/data
+
+networks:
+  default:
+    # external: true
+    name: verapatchwork-network
