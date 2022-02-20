@@ -39,5 +39,5 @@ services:
 
 networks:
   default:
-    # external: true
+    external: true
     name: verapatchwork-network
