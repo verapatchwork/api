@@ -21,7 +21,7 @@ services:
         max-size: '10m'
         max-file: '5'
     volumes:
-      - ./app:/home/node/app
+      - /srv/verapatchwork/api-server/app:/home/node/app
     ports:
       - 3000:3000
     depends_on:
@@ -35,7 +35,7 @@ services:
       POSTGRES_USER: strapi
       POSTGRES_PASSWORD: strapi
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - /srv/verapatchwork/ai-server/data:/var/lib/postgresql/data
 
 networks:
   default:
