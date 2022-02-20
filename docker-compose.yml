@@ -21,7 +21,7 @@ services:
         max-size: '10m'
         max-file: '5'
     volumes:
-      - ./app:/srv/app
+      - ./app:/home/node/app
     ports:
       - 3000:3000
     depends_on:
